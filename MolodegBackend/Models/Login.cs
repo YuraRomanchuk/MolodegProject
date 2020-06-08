@@ -23,5 +23,6 @@ namespace MolodegBackend.Models.Resources
         public bool Successful { get; set; }
         public List<string> Errors { get; set; }
         public string Token { get; set; }
+        public string UserId { get; set; }
     }
 }

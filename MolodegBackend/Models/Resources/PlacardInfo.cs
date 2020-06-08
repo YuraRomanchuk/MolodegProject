@@ -17,5 +17,6 @@ namespace MolodegBackend.Models.Resources
         public string TbLink { get; set; }
         public string FbLink { get; set; }
         public string DiscordLink { get; set; }
+        public int LikeCount { get; set; }
     }
 }

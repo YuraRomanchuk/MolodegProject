@@ -8,6 +8,7 @@ using MolodegBackend.Models.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MolodegBackend.Controllers
@@ -39,14 +40,10 @@ namespace MolodegBackend.Controllers
                 return BadRequest("Placard object is null");
             }
             var placard = new Placard() { CreatedDate = DateTime.Now.ToLocalTime().ToString() };
+
             if (placardModel.Picture != null)
             {
-                byte[] imageData = null;
-                using (var binaryReader = new BinaryReader(placardModel.Picture.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)placardModel.Picture.Length);
-                }
-                placard.Picture = imageData;
+                placard.Picture = placardModel.Picture.ConvertToByteArray();
             }
 
             var resources = _mapper.Map(placardModel, placard);
@@ -55,9 +52,11 @@ namespace MolodegBackend.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<List<Placard>> GetPlacardsAsync()
+        public async Task<List<PlacardInfo>> GetPlacardsAsync()
         {
-            return await _placardService.GetAllPlacardAsync();
+            var placards = await _placardService.GetAllPlacardAsync();
+            var resourse = _mapper.Map(placards, new List<PlacardInfo>());
+            return resourse;
         }
 
         [HttpGet("{id}")]
@@ -76,6 +75,11 @@ namespace MolodegBackend.Controllers
             if (placard == null)
             {
                 return NotFound();
+            }
+
+            if (placardModel.Picture != null)
+            {
+                placard.Picture = placardModel.Picture.ConvertToByteArray();
             }
 
             var resourse = _mapper.Map(placardModel, placard);

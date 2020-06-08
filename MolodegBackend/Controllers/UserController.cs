@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MolodegBackend.Domain.Services;
+using MolodegBackend.Extensions;
 using MolodegBackend.Models;
 using MolodegBackend.Models.Resources;
 
@@ -33,6 +34,11 @@ namespace MolodegBackend.Controllers
             if (user == null)
             {
                 return NotFound();
+            }
+
+            if (userModel.ProfilePicture != null)
+            {
+                user.ProfilePicture = userModel.ProfilePicture.ConvertToByteArray();
             }
 
             var resourse = _mapper.Map(userModel, user);

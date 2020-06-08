@@ -99,6 +99,8 @@ namespace MolodegBackend
             services.AddScoped<IPlacardService, PlacardService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISupporterRepository, SupporterRepository>();
+            services.AddScoped<ISupporterService, SupporterService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

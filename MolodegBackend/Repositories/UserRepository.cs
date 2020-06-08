@@ -27,15 +27,15 @@ namespace MolodegBackend.Repositories
         public async Task<UserInfo> GetUserInfo(string userId)
         {
             return await context.Users.Where(i => i.Id == userId).AsNoTracking().Select(i =>
-            new UserInfo()
-            {
-                CreatedDate = i.CreatedDate,
-                Access = i.Access,
-                Description = i.Description,
-                Name = i.Name,
-                Placards = i.Placards,
-                ProfilePicture = i.ProfilePicture
-            }).FirstOrDefaultAsync();
+                new UserInfo()
+                {
+                    CreatedDate = i.CreatedDate,
+                    Access = i.Access,
+                    Description = i.Description,
+                    Name = i.Name,
+                    Placards = i.Placards,
+                    ProfilePicture = i.ProfilePicture
+                }).FirstOrDefaultAsync();
         }
     }
 }

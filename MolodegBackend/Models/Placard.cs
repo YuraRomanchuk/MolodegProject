@@ -18,5 +18,6 @@ namespace MolodegBackend.Models
         public string TbLink { get; set; }
         public string FbLink { get; set; }
         public string DiscordLink { get; set; }
+        public List<Supporter> Supporters { get; set; }
     }
 }

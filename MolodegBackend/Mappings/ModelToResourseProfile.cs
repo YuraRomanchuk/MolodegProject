@@ -12,7 +12,7 @@ namespace MolodegBackend.Mappings
     {
         public ModelToResourceProfile()
         {
-            CreateMap<Placard, PlacardInfo>();
+            CreateMap<Placard, PlacardInfo>().ForMember(x => x.LikeCount, opt => opt.MapFrom(s => s.Supporters.Count(i => i.Liked)));
         }
     }
 }

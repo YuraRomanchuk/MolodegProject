@@ -14,5 +14,6 @@ namespace MolodegBackend.Models
         public string CreatedDate { get; set; }
         public string Access { get; set; }
         public List<Placard> Placards { get; set; }
+        public List<Supporter> Supporters { get; set; }
     }
 }

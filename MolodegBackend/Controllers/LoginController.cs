@@ -59,14 +59,8 @@ namespace MolodegBackend.Controllers
                 signingCredentials: creds
             );
 
-            return Ok(new LoginResult { Successful = true,  Token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return Ok(new LoginResult { Successful = true, UserId = user.Result.Id, Token = new JwtSecurityTokenHandler().WriteToken(token) });
         }
 
-        [HttpPost("logout")]
-        public async Task<IActionResult> LogOut()
-        {
-            await _signInManager.SignOutAsync();
-            return Ok();
-        }
     }
 }
