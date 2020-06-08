@@ -60,9 +60,17 @@ namespace MolodegBackend.Controllers
             return await _placardService.GetAllPlacardAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<PlacardInfo> GetPlacardInfoAsync(int id)
+        {
+            var placard = await _placardService.GetSpecificPlacardAsync(id);
+            var resourse = _mapper.Map(placard, new PlacardInfo());
+            return resourse;
+        }
+
         [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, PlacardResourse placardModel)
+        public async Task<IActionResult> Put(int id, [FromForm]PlacardResourse placardModel)
         {
             var placard = await _placardService.GetSpecificPlacardAsync(id);
             if (placard == null)
@@ -70,7 +78,8 @@ namespace MolodegBackend.Controllers
                 return NotFound();
             }
 
-            await _placardService.UpdatePlacardAsync(placard);
+            var resourse = _mapper.Map(placardModel, placard);
+            await _placardService.UpdatePlacardAsync(resourse);
 
             return Ok();
         }

@@ -14,6 +14,7 @@ namespace MolodegBackend.Mappings
         public ResourceToModelProfile()
         {
             CreateMap<PlacardResourse, Placard>().ForMember(x => x.Picture, opt => opt.Ignore());
+            CreateMap<UserResourse, Placard>().ForMember(x => x.Picture, opt => opt.Ignore());
 
         }
     }
