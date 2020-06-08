@@ -10,8 +10,8 @@ using MolodegBackend;
 namespace MolodegBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200607202256_MyFirstMigration")]
-    partial class MyFirstMigration
+    [Migration("20200608092325_MainMigration2")]
+    partial class MainMigration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,8 +159,8 @@ namespace MolodegBackend.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("CreatedDate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiscordLink")
                         .HasColumnType("nvarchar(max)");
@@ -175,8 +175,8 @@ namespace MolodegBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Picture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ShortDescription")
                         .IsRequired()
@@ -186,6 +186,7 @@ namespace MolodegBackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -327,7 +328,9 @@ namespace MolodegBackend.Migrations
                 {
                     b.HasOne("MolodegBackend.Models.User", "User")
                         .WithMany("Placards")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

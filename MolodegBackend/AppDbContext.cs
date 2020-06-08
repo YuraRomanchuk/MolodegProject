@@ -19,7 +19,9 @@ namespace MolodegBackend
             builder.Entity<Placard>().HasKey(u => u.Id);
             builder.Entity<Placard>().Property(p => p.Name).IsRequired();
             builder.Entity<Placard>().Property(p => p.ShortDescription).IsRequired();
-            builder.Entity<Placard>().HasOne(p => p.User).WithMany(b => b.Placards);
+            builder.Entity<Placard>().Property(p => p.ShortDescription).IsRequired();
+            builder.Entity<Placard>().Property(p => p.UserId).IsRequired();
+            builder.Entity<Placard>().HasOne(p => p.User).WithMany(b => b.Placards).HasForeignKey(i => i.UserId);
         }
     }
 }

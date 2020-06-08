@@ -35,5 +35,16 @@ namespace MolodegBackend.Services
             await placardRepository.DeletePlacardAsync(id);
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task UpdatePlacardAsync(Placard placard)
+        {
+            placardRepository.UpdatePlacard(placard);
+            await unitOfWork.CompleteAsync();
+        }
+
+        public async Task<Placard> GetSpecificPlacardAsync(int id)
+        {
+            return await placardRepository.GetSpecificPlacardAsync(id);
+        }
     }
 }

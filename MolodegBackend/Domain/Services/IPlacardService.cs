@@ -11,5 +11,7 @@ namespace MolodegBackend.Domain.Services
         Task AddPlacardAsync(Placard placard);
         Task<List<Placard>> GetAllPlacardAsync();
         Task DeletePlacardAsync(int id);
+        public Task UpdatePlacardAsync(Placard placard);
+        Task<Placard> GetSpecificPlacardAsync(int id);
     }
 }

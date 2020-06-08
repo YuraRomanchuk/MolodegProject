@@ -33,5 +33,10 @@ namespace MolodegBackend.Repositories
             var placard = await GetSpecificPlacardAsync(id);
             context.Placards.Remove(placard);
         }
+
+        public void UpdatePlacard(Placard placard)
+        {
+            context.Entry(placard).State = EntityState.Modified;
+        }
     }
 }

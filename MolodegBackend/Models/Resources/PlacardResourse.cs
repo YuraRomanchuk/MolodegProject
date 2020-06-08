@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MolodegBackend.Models
+namespace MolodegBackend.Models.Resources
 {
-    public class Placard
+    public class PlacardResourse
     {
-        public int Id { get; set; }
+        [Required]
         public string UserId { get; set; }
-        public User User { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string ShortDescription { get; set; }
-        public string CreatedDate { get; set; }
-        public byte[] Picture { get; set; }
+        public IFormFile Picture { get; set; }
         public string FullDescription { get; set; }
         public string TbLink { get; set; }
         public string FbLink { get; set; }
