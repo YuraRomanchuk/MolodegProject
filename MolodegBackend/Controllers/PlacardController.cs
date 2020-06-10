@@ -18,11 +18,13 @@ namespace MolodegBackend.Controllers
     public class PlacardController : ControllerBase
     {
         private readonly IPlacardService _placardService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        public PlacardController(IPlacardService placardService, IMapper mapper)
+        public PlacardController(IPlacardService placardService, IMapper mapper, IUserService userService)
         {
             _placardService = placardService;
             _mapper = mapper;
+            _userService = userService;
         }
 
 
@@ -52,10 +54,26 @@ namespace MolodegBackend.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<List<PlacardInfo>> GetPlacardsAsync()
+        public async Task<List<PlacardInfo>> GetPlacardsAsync(string search, int page = 1) 
         {
-            var placards = await _placardService.GetAllPlacardAsync();
+            List<Placard> placards;
+            if (search != null)
+            {
+                placards = await _placardService.GetPlacardsByNameAsync(search);
+            }
+            else
+            {
+                placards = await _placardService.GetAllPlacardAsync();
+            }
             var resourse = _mapper.Map(placards, new List<PlacardInfo>());
+            foreach(var item in resourse)
+            {
+                var user = await _userService.GetUserAsync(item.UserId);
+                item.UserPicture = user.ProfilePicture;
+                item.UserName = user.Name;
+                item.UserLogin = user.UserName;
+            }
+            resourse = resourse.Skip(2 * (page - 10)).Take(10).ToList();
             return resourse;
         }
 
@@ -63,7 +81,11 @@ namespace MolodegBackend.Controllers
         public async Task<PlacardInfo> GetPlacardInfoAsync(int id)
         {
             var placard = await _placardService.GetSpecificPlacardAsync(id);
+            var user = await _userService.GetUserAsync(placard.UserId);
             var resourse = _mapper.Map(placard, new PlacardInfo());
+            resourse.UserPicture = user.ProfilePicture;
+            resourse.UserName = user.Name;
+            resourse.UserLogin = user.UserName;
             return resourse;
         }
 

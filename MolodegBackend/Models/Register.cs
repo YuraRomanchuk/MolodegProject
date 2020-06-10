@@ -19,6 +19,15 @@ namespace MolodegBackend.Models
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Підтвердіть пароль")]
+            [Compare("Password", ErrorMessage = "Паролі не співпадають")]
+            public string ConfirmPassword { get; set; }
+
+            [Required]
+            [EmailAddress]
+            public string Email { get; set; }
         }
 
         public class RegisterResult

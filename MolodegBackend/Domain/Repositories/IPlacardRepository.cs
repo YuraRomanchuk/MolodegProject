@@ -10,6 +10,7 @@ namespace MolodegBackend.Domain.Repositories
         Task<List<Placard>> GetAllPlacardsAsync();
         Task<Placard> GetSpecificPlacardAsync(int id);
         Task DeletePlacardAsync(int id);
-        public void UpdatePlacard(Placard placard);
+        void UpdatePlacard(Placard placard);
+        Task<List<Placard>> GetPlacardsByNameAsync(string name);
     }
 }

@@ -28,6 +28,11 @@ namespace MolodegBackend.Repositories
             return await context.Placards.Include(i => i.Supporters).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
         }
 
+        public async Task<List<Placard>> GetPlacardsByNameAsync(string name)
+        {
+            return await context.Placards.Include(i => i.Supporters).Where(i => i.Name.ToLower().Contains(name.ToLower())).AsNoTracking().ToListAsync();
+        }
+
         public async Task DeletePlacardAsync(int id)
         {
             var placard = await GetSpecificPlacardAsync(id);

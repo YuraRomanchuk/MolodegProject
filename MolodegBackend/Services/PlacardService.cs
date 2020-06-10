@@ -46,5 +46,10 @@ namespace MolodegBackend.Services
         {
             return await placardRepository.GetSpecificPlacardAsync(id);
         }
+
+        public async Task<List<Placard>> GetPlacardsByNameAsync(string name)
+        {
+            return await placardRepository.GetPlacardsByNameAsync(name);
+        }
     }
 }

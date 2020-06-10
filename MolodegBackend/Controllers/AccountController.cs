@@ -28,7 +28,7 @@ namespace MolodegBackend.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]RegisterModel model)
         {
-            var newUser = new User { UserName = model.Login, CreatedDate = DateTime.Now.ToLocalTime().ToString() };
+            var newUser = new User { UserName = model.Login, CreatedDate = DateTime.Now.ToLocalTime().ToString(), Email = model.Email };
 
             var result = await _userManager.CreateAsync(newUser, model.Password);
 
