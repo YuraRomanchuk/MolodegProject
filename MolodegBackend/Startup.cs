@@ -115,7 +115,7 @@ namespace MolodegBackend
 
             app.UseHttpsRedirection();
             app.UseSwagger();
-            app.UseCors(builder => builder.AllowAnyOrigin());
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MolodegAPI V1");
@@ -124,7 +124,7 @@ namespace MolodegBackend
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
