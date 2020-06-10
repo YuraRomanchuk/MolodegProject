@@ -60,6 +60,7 @@ namespace MolodegBackend
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityKey"]))
                     };
                 });
+            services.AddCors();
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
@@ -114,7 +115,7 @@ namespace MolodegBackend
 
             app.UseHttpsRedirection();
             app.UseSwagger();
-
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MolodegAPI V1");

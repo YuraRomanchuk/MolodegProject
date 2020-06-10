@@ -8,7 +8,6 @@ namespace MolodegBackend.Models.Resources
 {
     public class UserResourse
     {
-        public string UserId { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public IFormFile ProfilePicture { get; set; }

@@ -34,7 +34,9 @@ namespace MolodegBackend.Repositories
                     Description = i.Description,
                     Name = i.Name,
                     Placards = i.Placards,
-                    ProfilePicture = i.ProfilePicture
+                    ProfilePicture = i.ProfilePicture,
+                    Email = i.Email,
+                    Login = i.UserName
                 }).FirstOrDefaultAsync();
         }
     }
